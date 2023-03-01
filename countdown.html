@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Visszaszámlálás</title>
+	<style>
+		body {
+			background-color: #13495a;
+			color: #f1be6e;
+			font-family: Verdana, Tahoma;
+		}
+
+		h2 {
+			text-align: center;
+			font-size: x-large;
+		}
+
+		h1 {
+			text-align: center;
+			font-size: xx-large;
+		}
+
+		.countdown {
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="countdown">
+		<h2>A középiskola végéig</h2>
+		<h1 class="display"></h1>
+		<h2>van hátra</h2>
+	</div>
+
+	<script>
+		let prev = Date.now();
+		let target = 1683151200000;
+		let disp = document.getElementsByClassName("display")[0];
+		let data = [0, 0, 0, 0, 0];
+		function onFrame() {
+			let n = Date.now();
+			if (n - prev > 1000) {
+				data[0] = Math.trunc(((target - n) / 1000)) //sec
+				data[1] = Math.trunc(data[0] / 60); //min
+				data[2] = Math.trunc(data[1] / 60); //hour
+				data[3] = Math.trunc(data[2] / 24); //day
+				//console.log(data);
+				disp.textContent = data[3] + " nap, " + data[2] % 24 + " óra, " + data[1] % 60 + " perc, " + data[0] % 60 + " másodperc";
+				prev = n;
+			}
+			window.requestAnimationFrame(onFrame)
+		}
+
+		window.requestAnimationFrame(onFrame);
+	</script>
+</body>
+
+</html>
